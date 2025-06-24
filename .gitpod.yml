@@ -1,0 +1,14 @@
+tasks:
+  - name: Install Flutter & Setup Project
+    init: |
+      git clone https://github.com/flutter/flutter.git --depth 1
+      export PATH="$PATH:`pwd`/flutter/bin"
+      flutter precache
+      flutter config --no-analytics
+    command: |
+      export PATH="$PATH:`pwd`/flutter/bin"
+      flutter doctor
+
+ports:
+  - port: 8080
+    onOpen: open-preview
