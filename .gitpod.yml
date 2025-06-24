@@ -1,7 +1,9 @@
+# 가장 안정적인 Flutter를 설치하는 최종 설정입니다.
 tasks:
-  - name: Install Flutter & Setup Project
+  - name: Install Stable Flutter & Setup Project
     init: |
-      git clone https://github.com/flutter/flutter.git --depth 1
+      # Flutter의 'stable'(안정) 버전만 정확히 가져옵니다.
+      git clone https://github.com/flutter/flutter.git --branch stable --single-branch
       export PATH="$PATH:`pwd`/flutter/bin"
       flutter precache
       flutter config --no-analytics
