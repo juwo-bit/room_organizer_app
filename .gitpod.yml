@@ -1,12 +1,21 @@
-# 가장 안정적인 Flutter를 설치하는 최종 설정입니다.
+# Flutter 설치, 업그레이드, 프로젝트 생성을 모두 자동으로 수행하는 최종 설정입니다.
 tasks:
-  - name: Install Stable Flutter & Setup Project
+  - name: Fully Automated Flutter Setup
     init: |
-      # Flutter의 'stable'(안정) 버전만 정확히 가져옵니다.
+      # 1. 안정 버전의 Flutter를 설치합니다.
       git clone https://github.com/flutter/flutter.git --branch stable --single-branch
       export PATH="$PATH:`pwd`/flutter/bin"
-      flutter precache
-      flutter config --no-analytics
+
+      # 2. 설치된 Flutter를 최신 안정 버전으로 업그레이드합니다.
+      flutter upgrade
+
+      # 3. Flutter 프로젝트가 없다면, 자동으로 생성합니다.
+      if [ ! -f "pubspec.yaml" ]; then
+        flutter create .
+      fi
+
+      # 4. 필요한 패키지들을 미리 설치합니다.
+      flutter pub get
     command: |
       export PATH="$PATH:`pwd`/flutter/bin"
       flutter doctor
